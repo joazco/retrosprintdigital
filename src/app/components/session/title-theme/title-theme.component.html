@@ -1,0 +1,34 @@
+<h5
+  class="title is-5"
+  *ngIf="!_edit_mode"
+  [ngClass]="{ 'title-session-editable': moderator }"
+>
+  <span class="array-color" [ngClass]="theme.type"></span>
+  <span (click)="editTitle()" class="text-title">{{ _title }}</span
+  >&nbsp;
+  <button
+    class="button is-small button-append-info"
+    (click)="openModel.emit(true)"
+  >
+    <span class="icon is-small">
+      <i class="fas fa-plus"></i>
+    </span>
+  </button>
+</h5>
+<div class="field" *ngIf="_edit_mode">
+  <p class="control has-icons-left ">
+    <input
+      class="input"
+      [value]="_title"
+      (keyup.enter)="validTitle($event)"
+      (blur)="validTitle($event)"
+      autofocus
+      focus
+      sprintAutofocus
+      #inputTitle
+    />
+    <span class="icon is-small is-left">
+      <i class="fas fa-pen"></i>
+    </span>
+  </p>
+</div>

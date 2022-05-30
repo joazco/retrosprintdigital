@@ -1,0 +1,25 @@
+<sprint-loading text="Impression en cours....."></sprint-loading>
+<sprint-header-connected current="session"></sprint-header-connected>
+<section class="section">
+  <div class="container-fluid" *ngIf="_sprint">
+    <div class="columns ">
+      <h1 class="">{{ _sprint.label }}</h1>
+    </div>
+    <br />
+    <ng-container *ngFor="let content of _content">
+      <div class="columns">
+        <h2 ngClass="theme-{{ content.type }}">{{ content.title }}</h2>
+      </div>
+      <div class="columns list-info">
+        <ul>
+          <ng-container *ngFor="let info of content.infos">
+            <li>
+              <b>{{ info.user }}:</b> {{ info.text }}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      <br />
+    </ng-container>
+  </div>
+</section>

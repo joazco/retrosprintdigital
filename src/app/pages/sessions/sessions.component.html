@@ -1,0 +1,195 @@
+<sprint-loading *ngIf="_loadingPage"></sprint-loading>
+<sprint-header-connected current="session"></sprint-header-connected>
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column">
+        <sprint-buttons-session></sprint-buttons-session>
+      </div>
+    </div>
+    <div class="columns card-profil">
+      <div class="column is-full card-sessions">
+        <h2 class="title is-2 card-profil-header">Dernière session</h2>
+        <div class="columns table-content card-sessions-full-screen">
+          <p *ngIf="_last_session === null">&nbsp;&nbsp;Aucune session</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_last_session !== null"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Participants</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ _last_session.label }}</td>
+                <td>{{ userToParticipantsString(_last_session.users) }}</td>
+                <td>{{ _last_session.createDateString }}</td>
+                <td>
+                  <a
+                    class="button is-primary"
+                    [routerLink]="['/sessions/', _last_session.id]"
+                  >
+                    <span class="icon is-small">
+                      <i class="fas fa-external-link-alt"></i>
+                    </span>
+                    <span>Ouvrir</span></a
+                  >&nbsp;
+                  <a
+                    class="button is-danger print-session-btn"
+                    [routerLink]="['/print/', _last_session.id]"
+                    target="_blank"
+                  >
+                    <span class="icon is-small">
+                      <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span>Imprimer</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="columns table-content card-sessions-tablet">
+          <p *ngIf="_last_session === null">&nbsp;&nbsp;Aucune session</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_last_session !== null"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {{ _last_session.label }} <br />
+                  le :
+                  {{ _last_session.createDateString }}
+                </td>
+                <td>
+                  <div class="buttons has-addons">
+                    <a
+                      class="button is-primary"
+                      [routerLink]="['/sessions/', _last_session.id]"
+                    >
+                      <span class="icon is-small">
+                        <i class="fas fa-external-link-alt"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="button is-danger"
+                      target="_blank"
+                      [routerLink]="['/print/', _last_session.id]"
+                    >
+                      <span class="icon is-small">
+                        <i class="far fa-file-pdf"></i>
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sessions -->
+    <div class="columns card-profil card-sessions">
+      <div class="column is-full">
+        <h2 class="title is-2 card-profil-header">Sessions</h2>
+        <div class="columns table-content card-sessions-full-screen">
+          <p *ngIf="_sessions.length === 0">&nbsp;&nbsp;Aucune sessions</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_sessions.length > 0"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Participants</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let session of orderByDate()">
+                <td>{{ session.label }}</td>
+                <td>{{ session.participants }}</td>
+                <td>{{ session.createDate }}</td>
+                <td>
+                  <a
+                    class="button is-primary"
+                    [routerLink]="['/sessions/', session.uid]"
+                  >
+                    <span class="icon is-small">
+                      <i class="fas fa-external-link-alt"></i>
+                    </span>
+                    <span>Ouvrir</span></a
+                  >&nbsp;
+                  <a
+                    class="button is-danger print-session-btn"
+                    [routerLink]="['/print/', session.uid]"
+                    target="_blank"
+                  >
+                    <span class="icon is-small">
+                      <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span>Imprimer</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="columns table-content card-sessions-tablet">
+          <p *ngIf="_sessions.length === 0">&nbsp;&nbsp;Aucune sessions</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_sessions.length > 0"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let session of orderByDate()">
+                <td>{{ session.label }} <br />le : {{ session.createDate }}</td>
+                <td class="td-actions">
+                  <div class="buttons has-addons">
+                    <a
+                      class="button is-primary"
+                      [routerLink]="['/sessions/', session.uid]"
+                    >
+                      <span class="icon is-small">
+                        <i class="fas fa-external-link-alt"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="button is-danger"
+                      target="_blank"
+                      [routerLink]="['/print/', session.uid]"
+                    >
+                      <span class="icon is-small">
+                        <i class="far fa-file-pdf"></i>
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

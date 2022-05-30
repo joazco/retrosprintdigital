@@ -1,0 +1,282 @@
+<sprint-loading *ngIf="_loadingPage"></sprint-loading>
+<sprint-modal-edit-profil
+  *ngIf="_edit_profil"
+  (hideModal)="_edit_profil = false"
+></sprint-modal-edit-profil>
+<sprint-modal-edit-profil
+  *ngIf="_force_edit_profil"
+  (hideModal)="_force_edit_profil = false"
+  [disableCancel]="true"
+></sprint-modal-edit-profil>
+<sprint-modal-edit-password
+  *ngIf="_edit_password"
+  (hideModal)="_edit_password = false"
+></sprint-modal-edit-password>
+<sprint-header-connected current="profile"></sprint-header-connected>
+<section class="section">
+  <div class="container">
+    <div class="columns"><sprint-buttons-session></sprint-buttons-session></div>
+    <!-- Profil user -->
+    <div class="columns card-profil">
+      <div class="column is-full">
+        <h2 class="title is-2 card-profil-header">
+          Profil utilisateur
+          <button
+            class="button is-small card-profil-header-button-action"
+            (click)="_edit_profil = true"
+          >
+            <span class="icon is-small">
+              <i class="fas fa-edit"></i>
+            </span>
+          </button>
+        </h2>
+        <div class="columns card-profil-content" *ngIf="profileService.user">
+          <div class="column">
+            <ul>
+              <li>
+                <b>Nom d'utilisateur:</b>&nbsp;<span>{{
+                  profileService.user.username
+                }}</span>
+              </li>
+              <li>
+                <b>Nom:</b>&nbsp;
+                <span *ngIf="profileService.user.name">{{
+                  profileService.user.name
+                }}</span>
+                <span *ngIf="!profileService.user.name">N/A</span>
+              </li>
+              <li>
+                <b>Entreprise:</b>&nbsp;
+                <span *ngIf="profileService.user.business">{{
+                  profileService.user.business
+                }}</span>
+                <span *ngIf="!profileService.user.business">À renseigner</span>
+              </li>
+              <li>
+                <b>Inscription à la newsletter:</b>&nbsp;<span
+                  *ngIf="profileService.user.newsletter"
+                  >Oui</span
+                >
+                <span *ngIf="!profileService.user.newsletter">Non</span>
+              </li>
+            </ul>
+          </div>
+          <div class="column">
+            <ul>
+              <li>
+                <b>Email:</b>&nbsp;<span>{{ profileService.user.email }}</span>
+              </li>
+
+              <li>
+                <b>Prénom:</b>&nbsp;<span
+                  *ngIf="profileService.user.firstname"
+                  >{{ profileService.user.firstname }}</span
+                >
+                <span *ngIf="!profileService.user.name">N/A</span>
+              </li>
+              <li *ngIf="!profileService.is_provider">
+                <b>Mot de passe:</b>&nbsp;<span>••••••••</span>
+                <a
+                  class="button is-text"
+                  role="button"
+                  (click)="_edit_password = true"
+                >
+                  <i class="fas fa-edit"></i
+                ></a>
+              </li>
+
+              <li>
+                <span
+                  ><sup
+                    ><i>
+                      <a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLSc8OLATDRhYH4bwP-R55QPlZTiYgle5rQQIcOr3uQISbYCdZQ/viewform?usp=sf_link"
+                        target="_blank"
+                        ><i class="fas fa-bug"></i> Rapport de bugs</a
+                      ></i
+                    ></sup
+                  ></span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Google Form -->
+    <div class="columns card-google-form card-profil">
+      <div class="column is-full">
+        <h3 class="title is-3">
+          N'hésitez pas à nous faire un retour
+        </h3>
+        <div class="columns card-google-form-content">
+          <a
+            class="button is-primary"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc49CaY_uF4QspwmfQjFvtbiaUqXXQcKIJr3hRRaHDFiaYV_w/viewform?usp=sf_link"
+            target="_blank"
+          >
+            <span class="icon is-small">
+              <i class="fab fa-wpforms"></i>
+            </span>
+            <span>Formulaire</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Sessions -->
+    <div class="columns card-profil card-sessions">
+      <div class="column is-full ">
+        <h2 class="title is-2 card-profil-header">Sessions</h2>
+        <div class="columns table-content card-sessions-full-screen">
+          <p *ngIf="_sessions.length === 0">&nbsp;&nbsp;Aucune sessions</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_sessions.length > 0"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Participants</th>
+                <th>Date de création</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let session of orderByDate()">
+                <td>{{ session.label }}</td>
+                <td>{{ session.participants }}</td>
+                <td>{{ session.createDate }}</td>
+                <td>
+                  <a
+                    class="button is-primary"
+                    [routerLink]="['/sessions/', session.uid]"
+                  >
+                    <span class="icon is-small">
+                      <i class="fas fa-external-link-alt"></i>
+                    </span>
+                    <span>Ouvrir</span></a
+                  >&nbsp;
+                  <a
+                    class="button is-danger print-session-btn"
+                    target="_blank"
+                    [routerLink]="['/print/', session.uid]"
+                  >
+                    <span class="icon is-small">
+                      <i class="far fa-file-pdf"></i>
+                    </span>
+                    <span>Imprimer</span>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="columns table-content card-sessions-tablet">
+          <p *ngIf="_sessions.length === 0">&nbsp;&nbsp;Aucune sessions</p>
+          <table
+            class="table is-bordered is-striped column is-full table-sessions table-notifiation"
+            *ngIf="_sessions.length > 0"
+          >
+            <thead>
+              <tr>
+                <th>Session</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let session of orderByDate()">
+                <td>
+                  {{ session.label }} <br />
+                  le : {{ session.createDate }}
+                </td>
+                <td class="td-actions">
+                  <div class="buttons has-addons">
+                    <a
+                      class="button is-primary"
+                      [routerLink]="['/sessions/', session.uid]"
+                    >
+                      <span class="icon is-small">
+                        <i class="fas fa-external-link-alt"></i>
+                      </span>
+                    </a>
+                    <a
+                      class="button is-danger"
+                      target="_blank"
+                      [routerLink]="['/print/', session.uid]"
+                    >
+                      <span class="icon is-small">
+                        <i class="far fa-file-pdf"></i>
+                      </span>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Notifications -->
+    <div class="columns card-profil">
+      <div class="column is-full">
+        <h2 class="title is-2 card-profil-header">Actualités</h2>
+        <div class="columns table-content">
+          <table
+            class="table is-bordered is-striped column is-full table-notifiation"
+          >
+            <tbody>
+              <ng-container
+                *ngFor="let notification of profileService.notifications"
+              >
+                <tr *ngIf="notification">
+                  <td>{{ notification.createDate }}</td>
+                  <td>
+                    <i
+                      class="fas fa-info icon-primary"
+                      *ngIf="notification.type === 'info'"
+                    ></i>
+                    <i
+                      class="fas fa-exclamation-triangle icon-warning"
+                      *ngIf="notification.type === 'warning'"
+                    ></i>
+                    <i
+                      class="fas fa-exclamation-circle icon-danger"
+                      *ngIf="notification.type === 'danger'"
+                    ></i>
+                    &nbsp;&nbsp;
+                    {{ notification.message }}
+                    &nbsp;&nbsp;<span
+                      class="tag is-dark"
+                      *ngIf="notification.new"
+                      >New</span
+                    >
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Google Form -->
+    <div class="columns card-google-form card-profil">
+      <div class="column is-full">
+        <h3 class="title is-3">
+          Rapport de bugs
+        </h3>
+        <div class="columns card-google-form-content">
+          <a
+            class="button is-primary"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc8OLATDRhYH4bwP-R55QPlZTiYgle5rQQIcOr3uQISbYCdZQ/viewform?usp=sf_link"
+            target="_blank"
+          >
+            <span class="icon is-small">
+              <i class="fab fa-wpforms"></i>
+            </span>
+            <span>Formulaire</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

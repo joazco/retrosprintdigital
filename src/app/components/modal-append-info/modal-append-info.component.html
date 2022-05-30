@@ -1,0 +1,81 @@
+<div class="modal is-active">
+  <form [formGroup]="_form" (submit)="submit()">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Édition</p>
+        <button
+          class="delete"
+          aria-label="close"
+          (click)="hideModal.emit(true)"
+          type="button"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label required" for="categories">Colonne</label>
+          <div class="control">
+            <div
+              class="select"
+              [ngClass]="{
+                'is-danger': _form_status.theme.error,
+                'is-success': _form_status.theme.valid
+              }"
+            >
+              <select
+                formControlName="theme"
+                id="categories"
+                required
+                [value]="themeSelected.id"
+              >
+                <option value="" disabled [selected]="themeSelected === null"
+                  >Selectionner</option
+                >
+                <option *ngFor="let theme of themes" [value]="theme.id">{{
+                  theme.title
+                }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label required" for="message">Message</label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              id="message"
+              placeholder="Message"
+              formControlName="content"
+              required
+              [ngClass]="{
+                'is-danger': _form_status.content.error,
+                'is-success': _form_status.content.valid
+              }"
+              (keydown)="keyEnterSubmit($event)"
+              autofocus
+            ></textarea>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button
+          class="button is-primary"
+          [ngClass]="{ 'is-loading': _loading }"
+          type="submit"
+        >
+          <span class="icon is-small"> <i class="fas fa-check"></i> </span
+          >&nbsp;&nbsp;Sauvegarder
+        </button>
+        <button
+          class="button"
+          type="button"
+          [ngClass]="{ 'is-loading': _loading }"
+          (click)="hideModal.emit(true)"
+        >
+          <span class="icon is-small"> <i class="fas fa-times"></i> </span
+          >&nbsp;&nbsp;Annuler
+        </button>
+      </footer>
+    </div>
+  </form>
+</div>

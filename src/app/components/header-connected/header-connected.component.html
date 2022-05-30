@@ -1,0 +1,58 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" [routerLink]="['/profile']">
+      <img
+        src="https://firebasestorage.googleapis.com/v0/b/sprint-1bda4.appspot.com/o/logo-retrosprint.png?alt=media&token=34e77bb6-6e69-4e5f-98f4-87ad0417ca25"
+        alt="Logo Rétrospective Sprint Digital"
+      />
+    </a>
+
+    <a
+      role="button"
+      class="navbar-burger burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+      (click)="_buger_menu_is_open = !_buger_menu_is_open"
+      [ngClass]="{ 'is-active': _buger_menu_is_open }"
+    >
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" [ngClass]="{ 'is-active': _buger_menu_is_open }">
+    <div class="navbar-start">
+      <a
+        class="navbar-item"
+        [routerLink]="['/sessions']"
+        [ngClass]="{ 'is-active': current === 'session' }"
+      >
+        <i class="fas fa-tv"></i>&nbsp;Session
+      </a>
+      <a
+        class="navbar-item"
+        [routerLink]="['/profile']"
+        [ngClass]="{ 'is-active': current === 'profile' }"
+      >
+        <i class="fas fa-user-circle"></i>&nbsp;Profil
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <button
+            class="button is-danger btn-disconnect"
+            (click)="disconnect()"
+          >
+            <strong
+              ><i class="fas fa-sign-out-alt"></i>&nbsp;Déconnexion</strong
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

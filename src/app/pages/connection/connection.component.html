@@ -1,0 +1,208 @@
+<sprint-loading *ngIf="_loadingPage"></sprint-loading>
+<section class="section connection-page">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-full">
+        <a [routerLink]="['/']"><sprint-logo></sprint-logo></a>
+      </div>
+    </div>
+    <form class="columns form-bordered" [formGroup]="_form" (submit)="submit()">
+      <div class="column is-three-fifths column-login-with-email-password">
+        <h1 class="title is-1">Connexion</h1>
+        <div
+          class="notification is-warning"
+          *ngIf="_email_unverified_message.show"
+        >
+          <button
+            class="delete"
+            type="button"
+            (click)="hideEmailUnverifiedMessage()"
+          ></button>
+          Votre email n'est pas vérifié, veuillez procéder à la vérification ou
+          cliquez sur
+          <a (click)="resendVerificationMail($event)">ce lien</a> afin de
+          recevoir un nouvel email de vérification
+        </div>
+        <div
+          class="notification is-success"
+          *ngIf="_email_verified_sended_message.show"
+        >
+          <button
+            class="delete"
+            type="button"
+            (click)="hideEmailVerifiedSendedMessage()"
+          ></button>
+          {{ _email_verified_sended_message.message }}
+        </div>
+        <div class="notification is-success" *ngIf="_success_message.show">
+          <button
+            class="delete"
+            (click)="hideSuccessMessage()"
+            type="button"
+          ></button>
+          {{ _success_message.message }}
+        </div>
+        <div
+          class="notification is-success"
+          *ngIf="_success_reset_password_message.show"
+        >
+          <button
+            class="delete"
+            type="button"
+            (click)="hideSuccessResetPasswordMessage()"
+          ></button>
+          {{ _success_reset_password_message.message }}
+        </div>
+        <div class="notification is-danger" *ngIf="_ids_error_message.show">
+          <button
+            class="delete"
+            (click)="hideIdsErrorMessage()"
+            type="button"
+          ></button>
+          {{ _ids_error_message.message }}
+        </div>
+        <div class="notification is-info" *ngIf="_sso_error_message.show">
+          <button class="delete" (click)="hideSSOInfo()" type="button"></button>
+          {{ _sso_error_message.message }}
+        </div>
+        <div class="field">
+          <label class="label required" for="email">Email</label>
+          <p
+            class="control is-expanded has-icons-left"
+            [ngClass]="{
+              'has-icons-right':
+                _form_status.email.valid || _form_status.email.error
+            }"
+          >
+            <input
+              class="input"
+              type="email"
+              placeholder="Email"
+              formControlName="email"
+              name="email"
+              id="email"
+              autocomplete="username email"
+              required
+              [ngClass]="{
+                'is-success': _form_status.email.valid,
+                'is-danger': _form_status.email.error
+              }"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.email.valid"
+            >
+              <i class="fas fa-check"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.email.error"
+            >
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label required" for="password">Mot de passe</label>
+          <div
+            class="control has-icons-left has-icons-right"
+            [ngClass]="{
+              'has-icons-right':
+                _form_status.password.valid || _form_status.password.error
+            }"
+          >
+            <input
+              class="input"
+              type="password"
+              placeholder="Mot de passe"
+              name="password"
+              formControlName="password"
+              autocomplete="new-password"
+              id="password"
+              [ngClass]="{
+                'is-success': _form_status.password.valid,
+                'is-danger': _form_status.password.error
+              }"
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.password.valid"
+            >
+              <i class="fas fa-check"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.password.error"
+            >
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </div>
+          <p class="help is-link">
+            <a [routerLink]="['/forget-password']">Mot de passe oublié?</a>
+          </p>
+        </div>
+
+        <div class="field is-grouped is-grouped-left">
+          <div class="control">
+            <button
+              class="button is-primary"
+              type="submit"
+              [ngClass]="{ 'is-loading': _user_password_loading }"
+            >
+              <span class="icon is-small">
+                <i class="fas fa-sign-in-alt"></i> </span
+              >&nbsp;&nbsp; Connexion
+            </button>
+          </div>
+          <div class="control">
+            <button
+              class="button"
+              type="button"
+              [routerLink]="['/create-account']"
+            >
+              <span class="icon is-small"> <i class="fas fa-edit"></i> </span
+              >&nbsp;&nbsp; Pas encore de compte? Inscrivez-vous
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="column column-login-with-sso">
+        <h2 class="title is-2">Ou connectez-vous via</h2>
+        <div class="columns sso-buttons">
+          <div class="column is-full">
+            <button class="button" type="button" (click)="connectWithGoogle()">
+              <span class="icon is-small">
+                <img src="/assets/images/auth_service_google.svg" /> </span
+              ><span>Connexion avec Google</span>
+            </button>
+          </div>
+          <div class="column is-full">
+            <button class="button" type="button" (click)="connectWithGithub()">
+              <span class="icon is-small">
+                <img src="/assets/images/auth_service_github.svg" /> </span
+              ><span>Connexion avec Github</span>
+            </button>
+          </div>
+          <div class="column is-full">
+            <button
+              class="button"
+              type="button"
+              (click)="connectWithMicrosoft()"
+            >
+              <span class="icon is-small">
+                <img src="/assets/images/auth_service_mslive.svg" /> </span
+              ><span>Connexion avec Microsoft</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

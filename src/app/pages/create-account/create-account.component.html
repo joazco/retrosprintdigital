@@ -1,0 +1,294 @@
+<sprint-loading *ngIf="_loadingPage"></sprint-loading>
+<sprint-cgu *ngIf="_show_cgu" (hideModal)="_show_cgu = false"></sprint-cgu>
+
+<section class="section create-account-page">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-full"><sprint-logo></sprint-logo></div>
+    </div>
+
+    <form [formGroup]="_form" (submit)="submit()" class="form-bordered">
+      <h1 class="title is-1">Création d'un compte</h1>
+      <div class="notification is-danger" *ngIf="_error_creation.show">
+        <button class="delete" (click)="hideError()" type="button"></button>
+        {{ _error_creation.message }}
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label required" for="username"
+              >Nom d'utilisateur</label
+            >
+            <p
+              class="control is-expanded has-icons-left"
+              [ngClass]="{
+                'has-icons-right':
+                  _form_status.username.valid || _form_status.username.error
+              }"
+            >
+              <input
+                class="input"
+                type="text"
+                formControlName="username"
+                id="username"
+                name="username"
+                placeholder="Pseudonyme"
+                autocomplete="username"
+                [ngClass]="{
+                  'is-success': _form_status.username.valid,
+                  'is-danger': _form_status.username.error
+                }"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-user"></i>
+              </span>
+              <span
+                class="icon is-small is-right"
+                *ngIf="_form_status.username.valid"
+              >
+                <i class="fas fa-check"></i>
+              </span>
+              <span
+                class="icon is-small is-right"
+                *ngIf="_form_status.username.error"
+              >
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <label class="label required" for="email">Email</label>
+            <p
+              class="control is-expanded has-icons-left"
+              [ngClass]="{
+                'has-icons-right':
+                  _form_status.email.valid || _form_status.email.error
+              }"
+            >
+              <input
+                class="input"
+                type="email"
+                placeholder="Email"
+                name="email"
+                formControlName="email"
+                id="email"
+                autocomplete="username email"
+                [ngClass]="{
+                  'is-success': _form_status.email.valid,
+                  'is-danger': _form_status.email.error
+                }"
+                required
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span
+                class="icon is-small is-right"
+                *ngIf="_form_status.email.valid"
+              >
+                <i class="fas fa-check"></i>
+              </span>
+              <span
+                class="icon is-small is-right"
+                *ngIf="_form_status.email.error"
+              >
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-body">
+          <div class="field">
+            <label class="label" for="name">Nom</label>
+            <p class="control is-expanded has-icons-left">
+              <input
+                class="input"
+                type="text"
+                placeholder="Nom"
+                name="name"
+                formControlName="name"
+                id="name"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-address-card"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <label class="label" for="firstname">Prénom</label>
+            <p class="control is-expanded has-icons-left">
+              <input
+                class="input"
+                type="email"
+                placeholder="Prénom"
+                name="firstname"
+                formControlName="firstname"
+                id="firstname"
+              />
+              <span class="icon is-small is-left">
+                <i class="fas fa-address-card"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label required" for="business">Entreprise</label>
+        <p
+          class="control is-expanded has-icons-left"
+          [ngClass]="{
+            'has-icons-right':
+              _form_status.business.valid || _form_status.business.error
+          }"
+        >
+          <input
+            class="input"
+            type="text"
+            placeholder="Nom d'entreprise"
+            name="business"
+            formControlName="business"
+            id="business"
+            [ngClass]="{
+              'is-success': _form_status.business.valid,
+              'is-danger': _form_status.business.error
+            }"
+            required
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-building"></i>
+          </span>
+          <span
+            class="icon is-small is-right"
+            *ngIf="_form_status.business.valid"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+          <span
+            class="icon is-small is-right"
+            *ngIf="_form_status.business.error"
+          >
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field fied-password">
+        <label class="label required" for="password">Mot de passe</label>
+        <div
+          class="control has-icons-left has-icons-right"
+          [ngClass]="{
+            'has-icons-right':
+              _form_status.password.valid || _form_status.password.error
+          }"
+        >
+          <input
+            class="input"
+            [type]="_passowrd_input.type"
+            placeholder="Mot de passe"
+            name="password"
+            autocomplete="current-password"
+            formControlName="password"
+            id="password"
+            [ngClass]="{
+              'is-success': _form_status.password.valid,
+              'is-danger': _form_status.password.error
+            }"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-key"></i>
+          </span>
+          <span
+            class="icon is-small is-right password-error-check-icon"
+            *ngIf="_form_status.password.valid"
+          >
+            <i class="fas fa-check"></i>
+          </span>
+          <span
+            class="icon is-small is-right password-error-triange-icon"
+            *ngIf="_form_status.password.error"
+          >
+            <i class="fas fa-exclamation-triangle"></i>
+          </span>
+          <button
+            class="button is-small toogle-show-password is-primary"
+            type="button"
+            (click)="tooglePasswordInput()"
+          >
+            <span class="icon is-small">
+              <i class="far" [ngClass]="_passowrd_input.icon"></i>
+            </span>
+            &nbsp;
+          </button>
+        </div>
+        <p
+          class="help"
+          [ngClass]="{
+            'is-success': _form_status.password.valid,
+            'is-danger': _form_status.password.error
+          }"
+        >
+          Minimum de 8 caractères, un caractère miniscule et miniscule avec un
+          chiffre.
+        </p>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="newsletter" />
+            Accepter de recevoir des emails de la part de l'équipe
+            <i>Rétrospective Sprint Digital</i>
+          </label>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <label class="checkbox">
+            <input type="checkbox" formControlName="cgu" />
+            Accepter les
+            <u (click)="showCgu($event)">conditions générales d'utilisation</u
+            >&nbsp;de la plateforme
+            <i (click)="showCgu($event)">Rétrospective Sprint Digital</i>
+          </label>
+          <p
+            *ngIf="_form_status.cgu.error"
+            class="help"
+            [ngClass]="{
+              'is-success': _form_status.cgu.valid,
+              'is-danger': _form_status.cgu.error
+            }"
+          >
+            Vous devez accepter les conditions générales d'utilisation
+          </p>
+        </div>
+      </div>
+
+      <div class="field is-grouped is-grouped-right">
+        <div class="control">
+          <button
+            class="button is-primary"
+            type="submit"
+            [ngClass]="{ 'is-loading': _loading }"
+          >
+            <span class="icon is-small"> <i class="fas fa-check"></i> </span
+            >&nbsp;&nbsp; Créer
+          </button>
+        </div>
+        <div class="control">
+          <button
+            class="button"
+            type="button"
+            [routerLink]="['/connection']"
+            [ngClass]="{ 'is-loading': _loading }"
+          >
+            <span class="icon is-small"> <i class="fas fa-times"></i> </span
+            >&nbsp;&nbsp;Annuler
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

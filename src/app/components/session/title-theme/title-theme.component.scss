@@ -1,0 +1,37 @@
+@import "../../../../constants.scss";
+
+.array-color {
+  background: black;
+  position: relative;
+  top: 2px;
+  padding-right: 2px;
+  vertical-align: top;
+  margin-right: 6px;
+
+  &.is-success {
+    background-color: $primaryColor;
+  }
+
+  &.is-warning {
+    background-color: $warningColor;
+  }
+
+  &.is-danger {
+    background-color: $dangerColor;
+  }
+
+  &.is-valid {
+    background-color: $validColor
+  }
+}
+
+.button-append-info {
+  position: relative;
+  bottom: 2px;
+}
+
+.title-session-editable {
+  span.text-title {
+    cursor: pointer;
+  }
+}

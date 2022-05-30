@@ -1,0 +1,56 @@
+section {
+  &.create-account-page {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    form {
+      .field {
+        .button {
+          min-width: 100px;
+        }
+      }
+      .fied-password {
+        #password {
+          width: 97%;
+          border-right: none;
+        }
+        .password-error-triange-icon,
+        .password-error-check-icon {
+          margin-right: 3%;
+        }
+        .toogle-show-password {
+          width: 3% !important;
+          min-width: inherit !important;
+          position: relative;
+          left: -2px;
+          height: 36px !important;
+          border-top-left-radius: none;
+          span {
+            color: white !important;
+            margin-right: inherit !important;
+            margin-left: inherit !important;
+            font-size: 1.3em;
+          }
+        }
+        @media screen and (max-width: 880px) {
+          #password {
+            width: 80%;
+          }
+          .password-error-triange-icon,
+          .password-error-check-icon {
+            margin-right: 20%;
+          }
+          .toogle-show-password {
+            width: 20% !important;
+          }
+        }
+      }
+    }
+  }
+  sprint-logo {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+}

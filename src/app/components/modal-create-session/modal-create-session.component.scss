@@ -1,0 +1,86 @@
+@import "./../../../constants.scss";
+
+.table-list-users {
+  td {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+div.selected {
+  &.selected-primary {
+    border-color: $primaryColor;
+  }
+
+  &.selected-warningColor {
+    border-color: $warningColor;
+  }
+
+  &.selected-validColor {
+    border-color: $validColor;
+  }
+
+  &.selected-dangerColor {
+    border-color: $dangerColor;
+  }
+}
+
+.model-content {
+  width: 48%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #dbdbdb;
+  background: #f5f5f5;
+  cursor: pointer;
+  font-size: 1.1em;
+  float: left;
+  margin: 2.5px;
+
+
+
+  &.selected-warningColor {
+    p.model-title {
+      color: $warningColor
+    }
+  }
+
+  &.selected-validColor {
+    p.model-title {
+      color: $validColor
+    }
+  }
+
+  &.selected-dangerColor {
+    p.model-title {
+      color: $dangerColor
+    }
+  }
+
+  p.model-title {
+    text-align: center;
+    color: $primaryColor;
+    font-weight: bold;
+  }
+
+  p.model-subtitle,
+  p.model-text {
+    font-size: 0.7em;
+  }
+
+  &.model-last {
+    width: 98%;
+
+    &.disabled {
+      border: none;
+
+      p.model-title {
+        color: grey
+      }
+    }
+  }
+
+  @media screen and(max-width: 769px) {
+    width: 100% !important;
+  }
+}

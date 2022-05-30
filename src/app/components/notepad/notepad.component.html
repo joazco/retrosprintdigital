@@ -1,0 +1,12 @@
+<div class="notepad">
+  <div class="notepad-heading" [ngClass]="getType(theme)">
+    <h1>{{ username }}</h1>
+    <span class="delete" (click)="emitDelete($event)" *ngIf="isAdmin"
+      >&nbsp;</span
+    >
+  </div>
+  <p>
+    {{ content }}
+  </p>
+  <p></p>
+</div>

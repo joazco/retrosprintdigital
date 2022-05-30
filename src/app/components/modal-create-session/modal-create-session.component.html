@@ -1,0 +1,143 @@
+<div class="modal is-active">
+  <form [formGroup]="_form" (submit)="submit()">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Création d'une session RetroSprint</p>
+        <button
+          class="delete"
+          aria-label="close"
+          (click)="hide()"
+          type="button"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label required" for="name"
+            >Nom de la session rétrospective sprint</label
+          >
+          <p
+            class="control is-expanded has-icons-left"
+            [ngClass]="{
+              'has-icons-right':
+                _form_status.name.valid || _form_status.name.error
+            }"
+          >
+            <input
+              class="input"
+              type="text"
+              formControlName="name"
+              id="name"
+              name="name"
+              placeholder="Nom de la session rétrospective sprint"
+              [ngClass]="{
+                'is-success': _form_status.name.valid,
+                'is-danger': _form_status.name.error
+              }"
+              required
+              autofocus
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-tv"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.name.valid"
+            >
+              <i class="fas fa-check"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.name.error"
+            >
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </p>
+        </div>
+        <div class="field">
+          <label class="label required">Modèle</label>
+          <div
+            class=" model-content model-last selected-primary"
+            [ngClass]="{
+              selected: _modelSelections === 'last',
+              disabled: !_enableLast
+            }"
+            (click)="selectModel('last')"
+            disabled
+          >
+            <p class="model-title">Dernière session</p>
+            <p class="model-subtitle">
+              Si vous avez modifié les colonnes dans votre dernière session vous
+              pouvez les réutiliser
+            </p>
+          </div>
+          <div
+            class=" model-content selected-primary"
+            [ngClass]="{ selected: _modelSelections === 'default' }"
+            (click)="selectModel('default')"
+          >
+            <p class="model-title">Agile</p>
+            <p class="model-subtitle">
+              Liked, Learned, Lacked, Longed for
+            </p>
+            <p class="model-text">4 colonnes</p>
+          </div>
+          <div
+            class=" model-content selected selected-warningColor"
+            [ngClass]="{ selected: _modelSelections === 'startstopend' }"
+            (click)="selectModel('startstopend')"
+          >
+            <p class="model-title">Start Stop Continue</p>
+            <p class="model-subtitle">
+              Start, Stop, Continue
+            </p>
+            <p class="model-text">3 colonnes</p>
+          </div>
+          <div
+            class=" model-content selected selected-validColor"
+            [ngClass]="{ selected: _modelSelections === 'starfish' }"
+            (click)="selectModel('starfish')"
+          >
+            <p class="model-title">Starfish</p>
+            <p class="model-subtitle">
+              Start, More of, Continue, Less of, Stop
+            </p>
+            <p class="model-text">5 colonnes</p>
+          </div>
+          <div
+            class=" model-content  selected-dangerColor"
+            [ngClass]="{ selected: _modelSelections === 'anchorsengines' }"
+            (click)="selectModel('anchorsengines')"
+          >
+            <p class="model-title">
+              Anchors & Engines
+            </p>
+            <p class="model-subtitle">
+              Anchors, engines
+            </p>
+            <p class="model-text">2 colonnes</p>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button
+          class="button is-primary"
+          [ngClass]="{ 'is-loading': _loading }"
+          type="submit"
+        >
+          <span class="icon is-small"> <i class="fas fa-check"></i> </span
+          >&nbsp;&nbsp;Créer
+        </button>
+        <button
+          class="button"
+          type="button"
+          [ngClass]="{ 'is-loading': _loading }"
+          (click)="hide()"
+        >
+          <span class="icon is-small"> <i class="fas fa-times"></i> </span
+          >&nbsp;&nbsp;Annuler
+        </button>
+      </footer>
+    </div>
+  </form>
+</div>

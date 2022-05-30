@@ -1,0 +1,221 @@
+<sprint-cgu *ngIf="_show_cgu" (hideModal)="_show_cgu = false"></sprint-cgu>
+
+<div class="modal is-active">
+  <form [formGroup]="_form" (submit)="submit()">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Modification de votre profil</p>
+        <button
+          class="delete"
+          aria-label="close"
+          (click)="hide()"
+          type="button"
+          *ngIf="!disableCancel"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="notification is-danger" *ngIf="_error_edit.show">
+          <button
+            class="delete"
+            (click)="_error_edit.show = false"
+            type="button"
+          ></button>
+          {{ _error_edit.message }}
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-body">
+            <div class="field">
+              <label class="label required" for="username"
+                >Nom d'utilisateur</label
+              >
+              <p
+                class="control is-expanded has-icons-left"
+                [ngClass]="{
+                  'has-icons-right':
+                    _form_status.username.valid || _form_status.username.error
+                }"
+              >
+                <input
+                  class="input"
+                  type="text"
+                  formControlName="username"
+                  id="username"
+                  name="username"
+                  placeholder="Pseudonyme"
+                  autocomplete="username"
+                  [ngClass]="{
+                    'is-success': _form_status.username.valid,
+                    'is-danger': _form_status.username.error
+                  }"
+                  required
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-user"></i>
+                </span>
+                <span
+                  class="icon is-small is-right"
+                  *ngIf="_form_status.username.valid"
+                >
+                  <i class="fas fa-check"></i>
+                </span>
+                <span
+                  class="icon is-small is-right"
+                  *ngIf="_form_status.username.error"
+                >
+                  <i class="fas fa-exclamation-triangle"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <label class="label required" for="email">Email</label>
+              <p class="control is-expanded has-icons-left">
+                <input
+                  class="input disabled"
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  formControlName="email"
+                  id="email"
+                  autocomplete="username email"
+                  required
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-body">
+            <div class="field">
+              <label class="label" for="name">Nom</label>
+              <p class="control is-expanded has-icons-left">
+                <input
+                  class="input"
+                  type="text"
+                  placeholder="Nom"
+                  name="name"
+                  formControlName="name"
+                  id="name"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-address-card"></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <label class="label" for="firstname">Prénom</label>
+              <p class="control is-expanded has-icons-left">
+                <input
+                  class="input"
+                  type="email"
+                  placeholder="Prénom"
+                  name="firstname"
+                  formControlName="firstname"
+                  id="firstname"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-address-card"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label required" for="business">Entreprise</label>
+          <p
+            class="control is-expanded has-icons-left"
+            [ngClass]="{
+              'has-icons-right':
+                _form_status.business.valid || _form_status.business.error
+            }"
+          >
+            <input
+              class="input"
+              type="text"
+              placeholder="Nom d'entreprise"
+              name="business"
+              formControlName="business"
+              id="business"
+              [ngClass]="{
+                'is-success': _form_status.business.valid,
+                'is-danger': _form_status.business.error
+              }"
+              required
+            />
+            <span class="icon is-small is-left">
+              <i class="fas fa-building"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.business.valid"
+            >
+              <i class="fas fa-check"></i>
+            </span>
+            <span
+              class="icon is-small is-right"
+              *ngIf="_form_status.business.error"
+            >
+              <i class="fas fa-exclamation-triangle"></i>
+            </span>
+          </p>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" formControlName="newsletter" />
+              Accepter de recevoir des emails de la part de l'équipe
+              <i>Rétrospective Sprint Digital</i>
+            </label>
+          </div>
+        </div>
+        <div class="field" *ngIf="!profileService.user.cgu">
+          <div class="control">
+            <label class="checkbox">
+              <input type="checkbox" formControlName="cgu" />
+              Accepter les
+              <u (click)="showCgu($event)"
+                >conditions générales d'utilisation</u
+              >
+              de la plateforme
+              <i>Rétrospective Sprint Digital</i>
+            </label>
+            <p
+              *ngIf="_form_status.cgu.error"
+              class="help"
+              [ngClass]="{
+                'is-success': _form_status.cgu.valid,
+                'is-danger': _form_status.cgu.error
+              }"
+            >
+              Vous devez accepter les conditions générales d'utilisation
+            </p>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button
+          class="button is-primary"
+          [ngClass]="{ 'is-loading': _loading }"
+          type="submit"
+        >
+          <span class="icon is-small"> <i class="fas fa-check"></i> </span
+          >&nbsp;&nbsp;Sauvegarder
+        </button>
+        <button
+          class="button"
+          type="button"
+          [ngClass]="{ 'is-loading': _loading }"
+          (click)="hide()"
+          [disabled]="disableCancel"
+        >
+          <span class="icon is-small"> <i class="fas fa-times"></i> </span
+          >&nbsp;&nbsp;Annuler
+        </button>
+      </footer>
+    </div>
+  </form>
+</div>

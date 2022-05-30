@@ -1,0 +1,177 @@
+@import "../../../constants.scss";
+
+body {
+  color: #404040;
+  background: #3782b0;
+}
+
+.notepad,
+.notepad:before,
+.notepad:after {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(#f6abca 1px, transparent 1px),
+    -webkit-linear-gradient(#f6abca 1px, transparent 1px),
+    -webkit-linear-gradient(#e8e8e8 1px, transparent 1px);
+  background-image: -moz-linear-gradient(#f6abca 1px, transparent 1px),
+    -moz-linear-gradient(#f6abca 1px, transparent 1px),
+    -moz-linear-gradient(#e8e8e8 1px, transparent 1px);
+  background-image: -o-linear-gradient(#f6abca 1px, transparent 1px),
+    -o-linear-gradient(#f6abca 1px, transparent 1px),
+    -o-linear-gradient(#e8e8e8 1px, transparent 1px);
+  background-image: linear-gradient(#f6abca 1px, transparent 1px),
+    linear-gradient(#f6abca 1px, transparent 1px),
+    linear-gradient(#e8e8e8 1px, transparent 1px);
+  background-size: 1px 1px, 1px 1px, 23px 23px;
+  background-repeat: repeat-y, repeat-y, repeat;
+  background-position: 22px 0, 24px 0, 0 50px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.notepad {
+  position: relative;
+  padding: 0 23px 14px 35px;
+  width: 300px;
+  line-height: 23px;
+  font-size: 16px;
+  color: #333;
+  //   margin-bottom: 5px;
+}
+
+.notepad p,
+.notepad blockquote {
+  margin-bottom: 23px;
+}
+
+.notepad :last-child {
+  margin-bottom: 0;
+}
+
+.notepad:before,
+.notepad:after {
+  // content: "";
+  //   position: absolute;
+  //   z-index: -1;
+  //   top: 100%;
+  //   left: 3px;
+  //   right: 3px;
+  //   margin-top: -2px;
+  //   height: 4px;
+  //   background-size: 1px 1px, 1px 1px, 0 0;
+}
+
+.notepad:before {
+  //   z-index: -2;
+  //   left: 6px;
+  //   right: 6px;
+  //   height: 6px;
+  //   background-color: #eee;
+}
+
+.notepad-heading {
+  text-align: center;
+
+  h1 {
+    width: 90%;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .delete {
+    width: 9%;
+    float: left;
+    margin: 5px;
+  }
+}
+
+.notepad-heading-primary {
+  position: relative;
+  margin: 0 -23px 14px -35px;
+  height: 38px;
+  background: $primaryColor;
+  border-radius: 2px 2px 0 0;
+  background-image: -webkit-linear-gradient(top, $primaryColor, $primaryColor);
+  background-image: -moz-linear-gradient(top, $primaryColor, $primaryColor);
+  background-image: -o-linear-gradient(top, $primaryColor, $primaryColor);
+  background-image: linear-gradient(to bottom, $primaryColor, $primaryColor);
+  -webkit-box-shadow: inset 0 1px $primaryColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+  box-shadow: inset 0 1px $primaryColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+}
+
+.notepad-heading-valid {
+  position: relative;
+  margin: 0 -23px 14px -35px;
+  height: 38px;
+  background: $validColor;
+  border-radius: 2px 2px 0 0;
+  background-image: -webkit-linear-gradient(top, $validColor, $validColor);
+  background-image: -moz-linear-gradient(top, $validColor, $validColor);
+  background-image: -o-linear-gradient(top, $validColor, $validColor);
+  background-image: linear-gradient(to bottom, $validColor, $validColor);
+  -webkit-box-shadow: inset 0 1px $validColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+  box-shadow: inset 0 1px $validColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+}
+
+.notepad-heading-danger {
+  position: relative;
+  margin: 0 -23px 14px -35px;
+  height: 38px;
+  background: $dangerColor;
+  border-radius: 2px 2px 0 0;
+  background-image: -webkit-linear-gradient(top, $dangerColor, $dangerColor);
+  background-image: -moz-linear-gradient(top, $dangerColor, $dangerColor);
+  background-image: -o-linear-gradient(top, $dangerColor, $dangerColor);
+  background-image: linear-gradient(to bottom, $dangerColor, $dangerColor);
+  -webkit-box-shadow: inset 0 1px $dangerColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+  box-shadow: inset 0 1px $dangerColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+}
+
+.notepad-heading-warning {
+  position: relative;
+  margin: 0 -23px 14px -35px;
+  height: 38px;
+  background: $warningColor;
+  border-radius: 2px 2px 0 0;
+  background-image: -webkit-linear-gradient(top, $warningColor, $warningColor);
+  background-image: -moz-linear-gradient(top, $warningColor, $warningColor);
+  background-image: -o-linear-gradient(top, $warningColor, $warningColor);
+  background-image: linear-gradient(to bottom, $warningColor, $warningColor);
+  -webkit-box-shadow: inset 0 1px $warningColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+  box-shadow: inset 0 1px $warningColor, 0 2px 1px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(0, 0, 0, 0.5), 0 1px #000;
+}
+
+.notepad-heading>h1 {
+  line-height: 36px;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.7);
+}
+
+.notepad-heading:before,
+.notepad-heading:after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 1px;
+  right: 1px;
+  height: 0;
+  border-top: 1px dashed #617c90;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.notepad-heading:after {
+  bottom: 3px;
+  border-color: #071c2c;
+  border-color: rgba(0, 0, 0, 0.5);
+}

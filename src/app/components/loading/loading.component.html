@@ -1,0 +1,12 @@
+<div class="loading-root-sprint-no-effect">
+  <figure class="image loading-root-sprint-figure-no-effect">
+    <img
+      src="https://firebasestorage.googleapis.com/v0/b/sprint-1bda4.appspot.com/o/logo-retrosprint.png?alt=media&token=34e77bb6-6e69-4e5f-98f4-87ad0417ca25"
+      alt="Logo Rétrospective Sprint Digital"
+    />
+    <p class="spinnerLoad-spinner" *ngIf="_show_spinner">
+      <i class="fas fa-spinner fa-pulse" *ngIf="null === text"></i>
+      <span *ngIf="text">{{ text }}</span>
+    </p>
+  </figure>
+</div>

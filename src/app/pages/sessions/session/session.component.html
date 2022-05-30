@@ -1,0 +1,162 @@
+<sprint-loading *ngIf="_loadingPage"></sprint-loading>
+<sprint-header-connected current="session"></sprint-header-connected>
+
+<section class="section" *ngIf="_sprint">
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column content-session-title">
+        <sprint-session-title
+          [sprint]="_sprint"
+          [moderator]="_im_admin"
+        ></sprint-session-title>
+      </div>
+      <div class="column">
+        <p>Listes des utilisateurs connectés à la rétro :</p>
+        <p>
+          <sprint-chip
+            *ngFor="let user of _list_user"
+            (click)="selectOneOrMultipleUser($event, user)"
+            [active]="_list_user_selected.includes(user)"
+            checkbox="true"
+            ><span *ngIf="user.username && user.username !== ''">{{
+              user.username
+            }}</span
+            ><span *ngIf="!user.username || user.username === ''">{{
+              user.email
+            }}</span></sprint-chip
+          >
+          <sprint-chip
+            (click)="selectAll()"
+            [active]="
+              this._list_user_selected.length === this._list_user.length
+            "
+            ><span>Selectionner tous</span></sprint-chip
+          >
+        </p>
+        <p>
+          <a [routerLink]="['/print/', _sprint.id]" target="_blank">
+            <sprint-chip active="true" activeColor="#ff6663"
+              ><span
+                ><i class="fas fa-file-pdf"></i>&nbsp;Imprimer</span
+              ></sprint-chip
+            >
+          </a>
+          <sprint-chip
+            (click)="_sprint.link ? (_modal_show_link.show = true) : null"
+            [disabled]="_sprint.link ? false : true"
+            *ngIf="_im_admin"
+            active="true"
+            activeColor="#2ed573"
+            ><span
+              ><i class="fas fa-link"></i>&nbsp;Lien de connection</span
+            ></sprint-chip
+          >
+        </p>
+        <p>
+          <sprint-chip
+            (click)="_modal_append_column.show = true"
+            *ngIf="_im_admin && _sprint.counterTheme"
+            active="true"
+            activeColor="#718093"
+            ><span
+              ><i class="fas fa-plus-square"></i>&nbsp;Ajouter une colonne</span
+            ></sprint-chip
+          >
+          <sprint-chip
+            (click)="_modal_minus_column.show = true"
+            *ngIf="_im_admin && _sprint.counterTheme"
+            active="true"
+            activeColor="#718093"
+            ><span
+              ><i class="fas fa-minus-square"></i>&nbsp;Enlever une
+              colonne</span
+            ></sprint-chip
+          >
+        </p>
+      </div>
+    </div>
+    <div class="columns content-session" [style.height.px]="_width">
+      <div class="column child" *ngFor="let theme of _list_item">
+        <!-- <div class="columns"> -->
+        <div class="column">
+          <sprint-session-title-theme
+            [sprint]="_sprint"
+            [moderator]="_im_admin"
+            [theme]="theme"
+            (openModel)="
+              _modal_info = {
+                show: true,
+                themeSelected: theme
+              }
+            "
+          ></sprint-session-title-theme>
+        </div>
+        <!-- </div> -->
+        <!-- <div class="columns"> -->
+        <ng-container *ngFor="let cardInfo of _card_infos">
+          <ng-container *ngFor="let info of cardInfo.infos">
+            <!-- <h3>{{ cardInfo.name }}</h3> -->
+            <sprint-notepad
+              *ngIf="info.theme === theme.id"
+              [username]="cardInfo.name"
+              [content]="info.content"
+              [theme]="info.theme"
+              [themes]="_list_item"
+              [isAdmin]="cardInfo.userUid === profileService.user.uid"
+              (delete)="
+                cardInfo.userUid === profileService.user.uid
+                  ? deleteInfo(cardInfo.userUid, info.id)
+                  : ''
+              "
+              (click)="
+                cardInfo.userUid === profileService.user.uid
+                  ? (_modal_info = {
+                      show: true,
+                      edit: {
+                        uidUser: cardInfo.userUid,
+                        uidSprint: _sprint.id,
+                        info: info
+                      },
+                      themeSelected: theme
+                    })
+                  : ''
+              "
+              class="column"
+              [ngClass]="{
+                pointer: cardInfo.userUid === profileService.user.uid
+              }"
+            >
+            </sprint-notepad>
+          </ng-container>
+        </ng-container>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<sprint-modal-append-info
+  *ngIf="_modal_info.show"
+  [sprint]="_sprint"
+  [themes]="_list_item"
+  [edit]="_modal_info.edit"
+  [themeSelected]="_modal_info.themeSelected"
+  (hideModal)="_modal_info = { show: false, edit: null, themeSelected: null }"
+></sprint-modal-append-info>
+<sprint-modal-append-column
+  *ngIf="_modal_append_column.show"
+  [sprint]="_sprint"
+  [edit]="_modal_info.edit"
+  (hideModal)="_modal_append_column.show = false"
+></sprint-modal-append-column>
+<sprint-modal-link-session
+  *ngIf="_modal_show_link.show"
+  [link]="_sprint.link"
+  (hideModal)="_modal_show_link.show = false"
+></sprint-modal-link-session>
+<sprint-modal-minus-column
+  *ngIf="_modal_minus_column.show"
+  [themes]="_list_item"
+  [sprint]="_sprint"
+  (hideModal)="_modal_minus_column = { show: false }"
+></sprint-modal-minus-column>

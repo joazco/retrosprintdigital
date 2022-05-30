@@ -1,0 +1,50 @@
+<div class="modal is-active">
+  <form>
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Lien de connexion à la session</p>
+        <button
+          class="delete"
+          aria-label="close"
+          (click)="hideModal.emit(true)"
+          type="button"
+        ></button>
+      </header>
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label " for="name"
+            >Lien de connexion à la session :</label
+          >
+          <div class="control has-icons-right">
+            <input
+              class="input"
+              id="input-link-copy"
+              (click)="copy()"
+              type="text"
+              required
+              autofocus
+              readonly
+              [value]="_url"
+              [ngClass]="{ 'is-success': _is_copy }"
+            />
+            <span class="icon is-small is-right" *ngIf="_is_copy">
+              <i class="fas fa-copy"></i>
+            </span>
+            <p class="help is-success" *ngIf="_is_copy">Copié!</p>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-primary" type="button" (click)="copy()">
+          <span class="icon is-small"> <i class="fas fa-check"></i> </span
+          >&nbsp;&nbsp;Copier
+        </button>
+        <button class="button" (click)="hideModal.emit(true)">
+          <span class="icon is-small"> <i class="fas fa-times"></i> </span
+          >&nbsp;&nbsp;Fermer
+        </button>
+      </footer>
+    </div>
+  </form>
+</div>

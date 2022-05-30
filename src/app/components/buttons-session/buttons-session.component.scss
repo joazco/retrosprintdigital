@@ -1,0 +1,15 @@
+.field.is-grouped {
+  @media screen and (max-width: 880px) {
+    display: block;
+    p.control {
+      .button-session {
+        margin-bottom: 10px;
+      }
+    }
+  }
+  p.control {
+    .button-session {
+      width: 300px !important;
+    }
+  }
+}

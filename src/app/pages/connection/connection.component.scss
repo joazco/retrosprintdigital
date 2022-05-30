@@ -1,0 +1,89 @@
+section {
+  &.connection-page {
+    @media screen and (min-width: 880px) {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+    }
+
+    form {
+      .field {
+        .button {
+          min-width: 100px;
+        }
+      }
+
+      .help.is-link {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      @media screen and (max-width: 880px) {
+        .field.is-grouped {
+          display: block;
+
+          .control {
+            width: 100% !important;
+
+            button {
+              width: 100% !important;
+              margin-bottom: 5px;
+
+              .icon {
+                display: none;
+              }
+
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .column-login-with-email-password {
+    position: relative;
+    padding-right: 30px;
+
+    @media screen and (min-width: 780px) {
+      &:after {
+        height: 100%;
+        content: "";
+        background: #d3d3d3;
+        width: 1px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+
+    @media screen and (max-width: 779px) {
+      &:after {
+        height: 1px;
+        content: "";
+        background: #d3d3d3;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+  .column-login-with-sso {
+    padding-left: 30px;
+
+    .sso-buttons {
+      padding: 30px;
+      display: initial;
+
+      button {
+        min-width: 100%;
+      }
+    }
+  }
+}

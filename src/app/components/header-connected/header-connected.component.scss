@@ -1,0 +1,13 @@
+@import "../../../constants.scss";
+nav.navbar {
+  border-bottom: 3px $primaryColor solid;
+  .btn-disconnect {
+    width: 100%;
+  }
+}
+
+@media print {
+  .navbar-burger.burger {
+    display: none;
+  }
+}

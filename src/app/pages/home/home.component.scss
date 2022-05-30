@@ -1,0 +1,70 @@
+@import "../../../constants.scss";
+nav.navbar {
+  .btn-disconnect {
+    width: 100%;
+  }
+}
+.section {
+  padding: 0 0.75rem !important;
+}
+.columns-all {
+  min-height: 200px;
+  padding: 50px;
+  margin-bottom: 10px;
+  &.last-child {
+    margin-bottom: 0 !important;
+  }
+  &.columns-info {
+    background: $primaryColor;
+
+    text-align: center;
+    color: white;
+    .title {
+      color: white;
+    }
+  }
+  &.columns-demo {
+  }
+
+  &.columns-advantage {
+    background: $primaryColor;
+    color: white;
+    .column-advantage {
+      text-align: center;
+      i {
+        font-size: 300px;
+      }
+    }
+  }
+}
+.columns-advantage-title {
+  background: $primaryColor;
+  .title-advantage {
+    text-align: center;
+    color: white;
+  }
+}
+.column-image {
+  text-align: center;
+  padding: 10px;
+  img {
+    height: auto;
+    border: 1px solid #e3e3e3;
+  }
+}
+@media screen and(max-width: 769px) {
+  .columns-advantage-title {
+    margin-bottom: 0;
+  }
+  .column-advantage {
+    margin: 20px;
+  }
+}
+@media screen and(max-width: 400px) {
+  .section {
+    padding: 0 0.25rem !important;
+  }
+}
+.navbar-burger {
+  display: none;
+}

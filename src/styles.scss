@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./constants.scss";
+
+.button.is-primary {
+  background-color: $primaryColor !important;
+  color: #fff;
+}
+.button.is-danger {
+  background-color: $dangerColor !important;
+  color: #fff;
+}
+.button.is-warning {
+  background-color: $warningColor !important;
+  color: #fff;
+  &:hover,
+  &:focus,
+  &:active {
+    color: #fff;
+  }
+}
+svg.icon-primary {
+  color: $primaryColor !important;
+}
+svg.icon-danger {
+  color: $dangerColor !important;
+}
+svg.icon-warning {
+  color: $warningColor !important;
+}
+
+form {
+  &.form-bordered {
+    border: 1px solid #d3d3d3;
+    border-radius: 10px;
+  }
+
+  padding: 20px;
+  .label {
+    &.required {
+      &:after {
+        margin: -0.2em 0 0 0.2em;
+        content: "*";
+        color: #db2828;
+      }
+    }
+  }
+}
+.modal-card {
+  margin-left: 0 !important;
+}
+
+@media screen and (max-width: 412px) {
+  .modal {
+    .delete,
+    .modal-close  {
+      // display: none;
+    }
+    .modal-card-title {
+      max-width: 93%;
+      text-overflow: clip;
+    }
+  }
+}
+
+div.table-content {
+  overflow: auto;
+}
+
+a.navbar-item.is-active {
+  background-color: #ededed !important;
+}
+
+.modal-card {
+  margin-left: 0 !important;
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+    0 10px 10px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.modal-background {
+  background: transparent;
+}

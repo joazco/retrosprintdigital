@@ -1,0 +1,67 @@
+@import "../../../constants.scss";
+
+div.card-profil {
+  padding: 20px;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  margin: 5px;
+
+  .card-profil-header {
+    color: $primaryColor;
+
+    .card-profil-header-button-action {
+      position: relative;
+      bottom: 2px;
+      right: 2px;
+    }
+  }
+
+  .card-profil-content {
+    padding-left: 20%;
+    padding-right: 20%;
+    font-size: 1.2em;
+  }
+
+  @media screen and (max-width: 880px) {
+    .card-profil-content {
+      padding-left: 0%;
+      padding-right: 0%;
+    }
+  }
+
+  .table-notifiation {
+    display: table !important;
+  }
+}
+
+.grecaptcha-badge {
+  display: none;
+}
+
+.card-sessions {
+  .card-sessions-tablet {
+    display: none;
+  }
+
+  @media screen and (max-width: 1218px) {
+    .card-sessions-full-screen {
+      display: none;
+    }
+
+    .card-sessions-tablet {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .td-actions {
+      padding: 0;
+      padding-top: 24px;
+      padding-left: 5px;
+    }
+  }
+}
+
+.grecaptcha-logo {
+  display: none;
+}

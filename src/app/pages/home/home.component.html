@@ -1,0 +1,131 @@
+<header>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" [routerLink]="['/']">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/sprint-1bda4.appspot.com/o/logo-retrosprint.png?alt=media&token=34e77bb6-6e69-4e5f-98f4-87ad0417ca25"
+          alt="Logo Rétrospective Sprint Digital"
+        />
+      </a>
+
+      <a
+        role="button"
+        class="navbar-burger burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+        (click)="_buger_menu_is_open = !_buger_menu_is_open"
+        [ngClass]="{ 'is-active': _buger_menu_is_open }"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu" [ngClass]="{ 'is-active': _buger_menu_is_open }">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a
+              role="link"
+              class="button is-primary"
+              [routerLink]="['/connection']"
+            >
+              <strong
+                ><i class="fas fa-door-open"></i>&nbsp;Essayer
+                gratuitement</strong
+              >
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <section class="section">
+    <div class="container-fluid">
+      <article class="columns columns-all columns-info">
+        <div class="column">
+          <h1 class="title is-1">RetroSprint Digital</h1>
+          <p>
+            RetroSprint Digital est une plateforme en ligne qui permet d'animer
+            vos rétrospectives d'une façon digital avec tous ses avantages
+            gratuitement.
+          </p>
+        </div>
+      </article>
+      <article class="columns columns-all columns-demo">
+        <div class="column is-half">
+          <h2 class="title is-2">
+            Une solution digital pour vos rétrospectives Sprint
+          </h2>
+          <p>
+            Une fois inscrit, vous aurez accès à une multitude de
+            fonctionnalités afin d'animer vos rétrospectives Sprint. En effet,
+            il vous sera possible par exemple d'imprimer le compte-rendu de
+            votre rétrospective sprint, ainsi que d'avoir un historique de vos
+            rétrospectives.<br /><br />
+            Venez
+            <a role="link" [routerLink]="['/connection']"
+              >essayer gratuitement</a
+            >
+            notre solution écologique d'animation de rétrospective sprint. Que
+            vous soyez en télétravail ou sur mobile, notre plateforme s'adapte à
+            toutes les situations.
+          </p>
+        </div>
+        <div class="column column-image">
+          <img
+            class="is-mobile is-centered"
+            src="https://firebasestorage.googleapis.com/v0/b/sprint-1bda4.appspot.com/o/demo-home.png?alt=media&token=8deaa285-60fb-4407-9b4a-74c57917a44b"
+            alt="Image de la plateforme Rétrospective Sprint Digital"
+          />
+        </div>
+      </article>
+      <article>
+        <div class="columns columns-advantage-title">
+          <div class="column">
+            <h2 class="title is-1 title-advantage">Avantages</h2>
+          </div>
+        </div>
+        <div class="columns columns-advantage columns-all last-child">
+          <div class="column">
+            <div class="columns">
+              <div class="column column-advantage">
+                <span class="icon">
+                  <i class="fas fa-globe-americas fas fa-3x"></i>
+                </span>
+                <p>
+                  Fini les bloc-notes gâchés. RétroSprint Digital se veut
+                  écologique !
+                </p>
+              </div>
+              <div class="column column-advantage">
+                <span class="icon">
+                  <i class="fas fa-home fas fa-3x"></i>
+                </span>
+                <p>Participez à votre rétrospective sprint en télétravail</p>
+              </div>
+              <div class="column column-advantage">
+                <span class="icon">
+                  <i class="fas fa-file-pdf fas fa-3x"></i>
+                </span>
+                <p>
+                  Imprimez votre compte-rendu à la fin de la rétrospective
+                  sprint en un clic
+                </p>
+              </div>
+              <div class="column column-advantage">
+                <span class="icon">
+                  <i class="fas fa-folder-open fas fa-3x"></i>
+                </span>
+                <p>Accédez à un historique de vos rétrospectives sprint</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>

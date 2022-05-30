@@ -1,0 +1,22 @@
+select#categories {
+  width: 100%;
+
+}
+
+.controle-select-categories-arround {
+  display: inline-block;
+
+  .select-categories-arround {
+    width: 25px;
+    height: 25px;
+    border-radius: 50px;
+    float: left;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+
+  .selected {
+    border-width: 2px;
+    border-style: solid;
+  }
+}
